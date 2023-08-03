@@ -6,26 +6,26 @@ import Loginaslist from "../components/loginaslist";
 import Inputs from "../components/inputs";
 import { useDispatch, useSelector } from "react-redux";
 import Authservise from "../service/auth";
-import { registerUserFail, registerUserStart, registerUserSuccess } from "../slice/auth";
+import { singFail, singStart, singSuccesss } from "../slice/auth";
 const Register = () => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
 
-  const loginHendel = async (e) => {
+  const RegisterHendel = async (e) => {
     e.preventDefault()
-    dispatch(registerUserStart())
+    dispatch(singStart())
     const user = {
       username: name , 
       email ,
       password,
     }
     try {
-      dispatch(registerUserSuccess())
       const response = await Authservise.userRegister(user)
+      dispatch(singSuccesss(response.user))
       console.log(response , user);
     } catch (error) {
-      dispatch(registerUserFail())
-      console.log("czjhcvkljhklh");
+      console.log(error.response.data);
+      dispatch(singFail(error.response.data.errors))
     }
   }
   const [name, setname] = useState('')
@@ -81,7 +81,7 @@ const Register = () => {
               <Inputs label={'Email address'} type={'email'} value={email} setValue={setemail}/>
               <Inputs label={'Email password'} type={'password'} value={password} setValue={setpassword}/>
               <Inputs label={'Email username'} type={'text'} vlaue={name} setValue={setname}/>
-              <button onClick={loginHendel} className={`bg-[#0089ED] text-[#fff] ${isLoading ? "cursor-wait" : 'cursor-pointer'} rounded-[10px] text-[16px] font-medium w-[451px] h-[54px] hover:opacity-60`}>
+              <button onClick={RegisterHendel} className={`bg-[#0089ED] text-[#fff] ${isLoading ? "cursor-wait" : 'cursor-pointer'} rounded-[10px] text-[16px] font-medium w-[451px] h-[54px] hover:opacity-60`}>
                 {isLoading ? "Loading..." : "Register"}
               </button>
             </form>
