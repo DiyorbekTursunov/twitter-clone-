@@ -5,21 +5,29 @@ import LoginAsDb from "../DB/LoginAsDb";
 import Loginaslist from "../components/loginaslist";
 import Inputs from "../components/inputs";
 import { useDispatch, useSelector } from "react-redux";
+import Authservise from "../service/auth";
 import { registerUserFail, registerUserStart, registerUserSuccess } from "../slice/auth";
 const Register = () => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
 
-  function loginHendel(e) {
+  const loginHendel = async (e) => {
     e.preventDefault()
     dispatch(registerUserStart())
+    const user = {
+      username: name , 
+      email ,
+      password,
+    }
     try {
       dispatch(registerUserSuccess())
+      const response = await Authservise.userRegister(user)
+      console.log(response , user);
     } catch (error) {
       dispatch(registerUserFail())
+      console.log("czjhcvkljhklh");
     }
   }
-  console.log(isLoading);
   const [name, setname] = useState('')
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
