@@ -4,7 +4,22 @@ import { Link } from "react-router-dom";
 import LoginAsDb from "../DB/LoginAsDb";
 import Loginaslist from "../components/loginaslist";
 import Inputs from "../components/inputs";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUserFail, registerUserStart, registerUserSuccess } from "../slice/auth";
 const Register = () => {
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.auth);
+
+  function loginHendel(e) {
+    e.preventDefault()
+    dispatch(registerUserStart())
+    try {
+      dispatch(registerUserSuccess())
+    } catch (error) {
+      dispatch(registerUserFail())
+    }
+  }
+  console.log(isLoading);
   const [name, setname] = useState('')
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
@@ -58,8 +73,8 @@ const Register = () => {
               <Inputs label={'Email address'} type={'email'} value={email} setValue={setemail}/>
               <Inputs label={'Email password'} type={'password'} value={password} setValue={setpassword}/>
               <Inputs label={'Email username'} type={'text'} vlaue={name} setValue={setname}/>
-              <button className="bg-[#0089ED] text-[#fff] rounded-[10px] text-[16px] font-medium w-[451px] h-[54px] hover:opacity-60">
-                Register
+              <button onClick={loginHendel} className={`bg-[#0089ED] text-[#fff] ${isLoading ? "cursor-wait" : 'cursor-pointer'} rounded-[10px] text-[16px] font-medium w-[451px] h-[54px] hover:opacity-60`}>
+                {isLoading ? "Loading..." : "Register"}
               </button>
             </form>
           </div>

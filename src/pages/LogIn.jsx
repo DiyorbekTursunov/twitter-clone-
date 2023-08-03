@@ -7,11 +7,21 @@ import AppleLogo from "../components/images/apple.png";
 import LoginAsDb from "../DB/LoginAsDb";
 import Loginaslist from "../components/loginaslist";
 import Inputs from "../components/inputs";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUserStart } from "../slice/auth";
 const LogIn = () => {
-  const [email, setemail] = useState('')
-  const [password, setpassword] = useState('')
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.auth);
+
+  function loginHendel(e) {
+    e.preventDefault()
+    dispatch(loginUserStart())
+  }
   return (
-    <div className="">
+    <>
+      <div className="">
       <div className="w-full bg-[#43b1ff] ">
         <div className="max-w-[1440px] mx-auto h-[458px]  flex justify-between px-5">
           <div className="flex items-center">
@@ -51,7 +61,10 @@ const LogIn = () => {
               </div>
               <div>
                 <p className="text-[#8D8D8D]">No Account ?</p>
-                <Link to={"/register"} className="text-[#0089ED] hover:opacity-70">
+                <Link
+                  to={"/register"}
+                  className="text-[#0089ED] hover:opacity-70"
+                >
                   register
                 </Link>
               </div>
@@ -59,7 +72,9 @@ const LogIn = () => {
             <div className="flex gap-[20px] mt-[43px]">
               <button className="flex items-center justify-center gap-[21px] rounded-[9px] w-[298px] h-[55px] bg-[#E9F1FF] hover:opacity-70">
                 <img src={GoogleLogo} alt="" />
-                <span className="text-[16px] text-[#4285F4] hover:opacity-70">Login with Google</span>
+                <span className="text-[16px] text-[#4285F4] hover:opacity-70">
+                  Login with Google
+                </span>
               </button>
               <button className="flex items-center justify-center rounded-[9px] bg-[#F6F6F6] w-[60px] h-[55px] hover:opacity-70">
                 <img src={FaceboolLogo} alt="" />
@@ -69,10 +84,21 @@ const LogIn = () => {
               </button>
             </div>
             <form className="flex flex-col gap-[38px] mt-[52px]">
-              <Inputs label={'Email address'} type={'email'} value={email} setValue={setemail}/>
-              <Inputs label={'Email password'} type={'password'} value={password} setValue={setpassword}/>
-              <button className="bg-[#0089ED] text-[#fff] rounded-[10px] text-[16px] font-medium w-[451px] h-[54px] hover:opacity-60">
-                Login
+              <Inputs
+                label={"Email address"}
+                type={"email"}
+                value={email}
+                setValue={setemail}
+              />
+              <Inputs
+                label={"Email password"}
+                type={"password"}
+                value={password}
+                setValue={setpassword}
+              />
+
+              <button onClick={loginHendel} className={`bg-[#0089ED] text-[#fff] ${isLoading ? "cursor-wait" : 'cursor-pointer'} rounded-[10px] text-[16px] font-medium w-[451px] h-[54px] hover:opacity-60`}>
+                {isLoading ? "Loading..." : "Login"}
               </button>
             </form>
           </div>
@@ -81,14 +107,13 @@ const LogIn = () => {
       <div className="max-w-[1440px] mx-auto px-5">
         <h3 className="mt-[54px] text-[16px]">Login as</h3>
         <div className="flex gap-[31px] mt-[26px]">
-          {LoginAsDb.map(item => {
-            return(
-              <Loginaslist item={item} key={item.id}/>
-            )
+          {LoginAsDb.map((item) => {
+            return <Loginaslist item={item} key={item.id} />;
           })}
         </div>
       </div>
     </div>
+    </>
   );
 };
 

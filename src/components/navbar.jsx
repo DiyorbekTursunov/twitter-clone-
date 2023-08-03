@@ -18,15 +18,6 @@ const Navbar = () => {
           <Link to={"/Register"} className="font-semibold text-[#882eff]">
             Register
           </Link>
-          <button className="text-[23.438px]">
-            <i className="fa-solid fa-magnifying-glass text-[#838383] "></i>
-          </button>
-          <button className="text-[23.438px]">
-            <i className="fa-regular fa-heart text-[#838383]"></i>
-          </button>
-          <button className="text-[23.438px]">
-            <i className="fa-regular fa-bell text-[#838383]"></i>
-          </button>
         </div>
       </div>
     </div>
