@@ -12,7 +12,8 @@ const Authservise = {
         return data  
     },
     async getUser () {
-        // const response = await axios.post('/users')
+        const {data} = await axios.get('/user')
+        return data
     }
 }
 export default Authservise

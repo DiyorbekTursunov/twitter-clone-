@@ -16,7 +16,6 @@ export const authSlice = createSlice({
         },
         singSuccesss: (state , action) => {
             setData('token' , action.payload.token)
-            console.log(action.payload.token);
             state.loggetIn = true
             state.isLoading = false
             state.user = action.payload
@@ -25,9 +24,13 @@ export const authSlice = createSlice({
             state.isLoading = false
             state.error = action.payload
         },
+        logout: state => {
+            state.loggetIn = false
+            state.user = null
+        }
     }
 })
 
-export const {singStart , singSuccesss , singFail} = authSlice.actions
+export const {singStart , singSuccesss , singFail , logout} = authSlice.actions
 
 export default authSlice.reducer

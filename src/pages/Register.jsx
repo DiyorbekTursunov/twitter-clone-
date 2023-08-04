@@ -9,7 +9,6 @@ import Authservise from "../service/auth";
 import { singFail, singStart, singSuccesss} from "../slice/auth";
 import ValidationError from "../validation/validationError";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 const Register = () => {
   const [name, setname] = useState('')
   const [email, setemail] = useState('')
@@ -26,6 +25,7 @@ const Register = () => {
       email ,
       password,
     }
+
     try {
       const response = await Authservise.userRegister(user)
       dispatch(singSuccesss(response.user))
@@ -34,11 +34,13 @@ const Register = () => {
       dispatch(singFail(error.response.data.errors))
     }
   }
+
   useEffect(() => {
     if (loggetIn) {
-      useNavigate('/')
+      Navigate('/')
     }
-  }, [])
+  }, [loggetIn])
+
   return (
     <div className="">
       <div className="w-full bg-[#43b1ff] ">
@@ -52,7 +54,7 @@ const Register = () => {
                     Online Chat
                   </h2>
                 </div>
-                <div className="">
+                <div>
                   <p>
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry. Lorem Ipsum has been the industry's
@@ -62,7 +64,7 @@ const Register = () => {
               </div>
             </div>
             <div>
-              <img src={LoginImg} alt="" />
+              <img src={LoginImg} alt="Login img" />
             </div>
           </div>
           <div className="w-[539px] h-[741px] bg-[#fff] rounded-[40px] p-[44px] mt-[79px] shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px] ">

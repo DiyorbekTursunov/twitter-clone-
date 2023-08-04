@@ -25,6 +25,7 @@ const LogIn = () => {
       email , 
       password ,
     }
+
     try {
       const response = await Authservise.userLogin(user)
       dispatch(singSuccesss(response.user))
@@ -33,11 +34,13 @@ const LogIn = () => {
       dispatch(singFail(error.response.data.errors))
     }
   }
+
   useEffect(() => {
     if (loggetIn) {
-      useNavigate('/')
+      Navigate('/')
     }
-  }, [])
+  }, [loggetIn])
+
   return (
     <>
       <div className="">
