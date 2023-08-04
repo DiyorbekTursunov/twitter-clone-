@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginImg from "../components/images/LoginImg.png";
 import { Link } from "react-router-dom";
 import GoogleLogo from "../components/images/google.png";
@@ -10,12 +10,14 @@ import Inputs from "../components/inputs";
 import { useDispatch, useSelector } from "react-redux";
 import Authservise from "../service/auth";
 import { singFail, singStart, singSuccesss } from "../slice/auth";
+import ValidationError from "../validation/validationError";
+import { useNavigate } from "react-router-dom";
 const LogIn = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => state.auth);
-
+  const { isLoading , loggetIn} = useSelector((state) => state.auth);
+  const Navigate = useNavigate()
   const loginHendel = async (e) => {
     e.preventDefault()
     dispatch(singStart())
@@ -25,12 +27,17 @@ const LogIn = () => {
     }
     try {
       const response = await Authservise.userLogin(user)
-      console.log(response , user);
       dispatch(singSuccesss(response.user))
+      Navigate('/')
     } catch (error) {
       dispatch(singFail(error.response.data.errors))
     }
   }
+  useEffect(() => {
+    if (loggetIn) {
+      useNavigate('/')
+    }
+  }, [])
   return (
     <>
       <div className="">
@@ -96,6 +103,7 @@ const LogIn = () => {
               </button>
             </div>
             <form className="flex flex-col gap-[38px] mt-[52px]">
+              <ValidationError/>
               <Inputs
                 label={"Email address"}
                 type={"email"}

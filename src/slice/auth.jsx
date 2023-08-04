@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setData } from "../helpers/local-storage";
 const initialState = {
     isLoading:false,
     loggetIn: false,
@@ -14,6 +15,8 @@ export const authSlice = createSlice({
             state.isLoading = true
         },
         singSuccesss: (state , action) => {
+            setData('token' , action.payload.token)
+            console.log(action.payload.token);
             state.loggetIn = true
             state.isLoading = false
             state.user = action.payload

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginImg from "../components/images/LoginImg.png";
 import { Link } from "react-router-dom";
 import LoginAsDb from "../DB/LoginAsDb";
@@ -6,10 +6,17 @@ import Loginaslist from "../components/loginaslist";
 import Inputs from "../components/inputs";
 import { useDispatch, useSelector } from "react-redux";
 import Authservise from "../service/auth";
-import { singFail, singStart, singSuccesss } from "../slice/auth";
+import { singFail, singStart, singSuccesss} from "../slice/auth";
+import ValidationError from "../validation/validationError";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const Register = () => {
+  const [name, setname] = useState('')
+  const [email, setemail] = useState('')
+  const [password, setpassword] = useState('')
+  const Navigate = useNavigate()
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => state.auth);
+  const { isLoading , loggetIn } = useSelector((state) => state.auth);
 
   const RegisterHendel = async (e) => {
     e.preventDefault()
@@ -22,15 +29,16 @@ const Register = () => {
     try {
       const response = await Authservise.userRegister(user)
       dispatch(singSuccesss(response.user))
-      console.log(response , user);
+      Navigate('/')
     } catch (error) {
-      console.log(error.response.data);
       dispatch(singFail(error.response.data.errors))
     }
   }
-  const [name, setname] = useState('')
-  const [email, setemail] = useState('')
-  const [password, setpassword] = useState('')
+  useEffect(() => {
+    if (loggetIn) {
+      useNavigate('/')
+    }
+  }, [])
   return (
     <div className="">
       <div className="w-full bg-[#43b1ff] ">
@@ -77,7 +85,8 @@ const Register = () => {
                 </Link>
               </div>
             </div>
-            <form className="flex flex-col gap-[38px] mt-[45px]">
+            <form className="flex flex-col gap-[38px] mt-[45px] ">
+              <ValidationError/>
               <Inputs label={'Email address'} type={'email'} value={email} setValue={setemail}/>
               <Inputs label={'Email password'} type={'password'} value={password} setValue={setpassword}/>
               <Inputs label={'Email username'} type={'text'} vlaue={name} setValue={setname}/>
