@@ -8,24 +8,36 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { singSuccesss } from "./slice/auth"
 import { getItem } from "./helpers/local-storage"
+import ArticleServise from "./service/article"
+import { getArticleFail, getArticleStart, getArticleSuccess } from "./slice/article"
 function App() {
   const dispatch = useDispatch()
 
   const getUser = async () => {
     try {
       const response = await Authservise.getUser()
-      console.log(response);
       dispatch(singSuccesss(response.user))
     } catch (error) {
       console.log("Error getUser");
     }
   }
+
+  const getArticle = async() => {
+    dispatch(getArticleStart())
+    try {
+      const response = await ArticleServise.getArticle()
+      dispatch(getArticleSuccess(response.articles))
+    } catch (error) {
+      dispatch(getArticleFail(error))
+    }
+  }
+
   useEffect(() => {
     const token = getItem('token')
-    console.log(token);
     if (token) {
       getUser() 
     }
+    getArticle()
   }, [])
   
   return (
