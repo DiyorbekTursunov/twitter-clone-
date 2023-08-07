@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LoginImg from "../components/images/LoginImg.png";
 import { Link } from "react-router-dom";
 import GoogleLogo from "../components/images/google.png";
@@ -120,7 +120,7 @@ const LogIn = () => {
                 setValue={setpassword}
               />
 
-              <button onClick={loginHendel} className={`bg-[#0089ED] text-[#fff] ${isLoading ? "cursor-wait" : 'cursor-pointer'} rounded-[10px] text-[16px] font-medium w-[451px] h-[54px] hover:opacity-60`}>
+              <button onClick={loginHendel} type="submit" className={`bg-[#0089ED] text-[#fff] ${isLoading ? "cursor-wait" : 'cursor-pointer'} rounded-[10px] text-[16px] font-medium w-[451px] h-[54px] hover:opacity-60`}>
                 {isLoading ? "Loading..." : "Login"}
               </button>
             </form>

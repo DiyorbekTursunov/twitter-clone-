@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import LogIn from "./pages/LogIn"
 import Register from "./pages/Register"
 import Navbar from "./components/navbar"
+import ArticleDetail from "./components/articleDetail"
 import Authservise from "./service/auth"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
@@ -10,6 +11,10 @@ import { singSuccesss } from "./slice/auth"
 import { getItem } from "./helpers/local-storage"
 import ArticleServise from "./service/article"
 import { getArticleFail, getArticleStart, getArticleSuccess } from "./slice/article"
+import CreatArticle from "./components/creatArticle"
+import EditArticle from "./components/editArticle"
+import UserPage from "./components/userPage"
+import UserPageChange from "./components/userPageChange"
 function App() {
   const dispatch = useDispatch()
 
@@ -22,22 +27,13 @@ function App() {
     }
   }
 
-  const getArticle = async() => {
-    dispatch(getArticleStart())
-    try {
-      const response = await ArticleServise.getArticle()
-      dispatch(getArticleSuccess(response.articles))
-    } catch (error) {
-      dispatch(getArticleFail(error))
-    }
-  }
 
   useEffect(() => {
     const token = getItem('token')
     if (token) {
       getUser() 
     }
-    getArticle()
+
   }, [])
   
   return (
@@ -47,6 +43,11 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<LogIn/>}/>
         <Route path="/Register" element={<Register/>}/>
+        <Route path="/article/:slug" element={<ArticleDetail/>}/>
+        <Route path="/creatArticle" element={<CreatArticle/>}/>
+        <Route path="/edit-article/:slug" element={<EditArticle/>}/>
+        <Route path="/user/:user" element={<UserPage/>}/>
+        <Route path="/user-change/:user" element={<UserPageChange/>}/>
       </Routes>
     </div>
   )

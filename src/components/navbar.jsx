@@ -5,43 +5,51 @@ import { removeItem } from "../helpers/local-storage";
 import { logout } from "../slice/auth";
 const Navbar = () => {
   const { loggetIn, user } = useSelector(state => state.auth)
+  const { isLoading } = useSelector(state => state.article)
   const Navigate = useNavigate()
   const dispatch = useDispatch()
 
   const logoutHandel = () => {
+    alert('Are you shour this')
     dispatch(logout())
     removeItem('token')
     Navigate('/login')
   }
-    return (
+  return (
     <div className="bg-[#69c0fe] ">
-      <div className="flex justify-between items-center py-6  max-w-[1440px] mx-auto px-5">
+      <div className="flex justify-between items-center h-[80px]  max-w-[1440px] mx-auto px-5">
         <div className="flex items-center gap-[9px]">
           <Link to={loggetIn == true ? "/" : 'login'}>
             <h2 className="uppercase text-[20px] font-bold text-[#a114ff] mr-[30px]">
-              Online Chat
+              Article
             </h2>
           </Link>
         </div>
         <div className="flex items-center gap-4">
-          {
-            loggetIn ?
-              <>
-                <div className="flex items-center gap-2">
-                  <img src={user.image} alt="" className="w-[50px] rounded-[50%]" />
+          {loggetIn ?
+            <>
+              <div className="flex items-center gap-2">
+                <img src={user.image} alt="" className="w-[40px] rounded-[50%]" />
+                <Link to={`/user/${user.username}`}>
                   <p className="font-semibold text-[#ff2bd5]">{user.username}</p>
-                </div>
-                <button className="px-3 py-2 text-[#e2e2e2] rounded-[10px] bg-red-400 hover:bg-red-600" onClick={logoutHandel}>logout</button>
-              </>
-              : <>
-                <Link to={"/login"} className="font-semibold text-[#ff2bd5]">
-                  Login
                 </Link>
-                <Link to={"/Register"} className="font-semibold text-[#882eff]">
-                  Register
+              </div>
+              <button className="px-2 py-1.5 bg-[#6e8dff] hover:bg-[#4d73ff] text-[#e2e2e2] rounded-[10px] " >
+                <Link to={"/creatArticle"} className="font-semibold text-[#61ff7b]">
+                  Creat article
                 </Link>
-              </>
-          }
+              </button>
+              <button className="px-2 py-1.5 text-[#e2e2e2] rounded-[10px] bg-red-400 hover:bg-red-600" onClick={logoutHandel}>logout</button>
+            </>
+            :
+            <>
+              <Link to={"/login"} className="font-semibold text-[#ff2bd5]">
+                Login
+              </Link>
+              <Link to={"/Register"} className="font-semibold text-[#882eff]">
+                Register
+              </Link>
+            </>}
         </div>
       </div>
     </div>
