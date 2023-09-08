@@ -22,8 +22,10 @@ const UserChangeForm = () => {
         try {
             dispatch(getUserSuccsess(user))
             const response =  await CangeUser.putUserServise(user)
+            Navigate('/')
             console.log(response);
         } catch (error) {
+            Navigate('/')
             dispatch(getUserFail(error))
         }
     }

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { removeItem } from "../helpers/local-storage";
 import { logout } from "../slice/auth";
+import NavModal from "./navModal";
 const Navbar = () => {
   const { loggetIn, user } = useSelector(state => state.auth)
   const { isLoading } = useSelector(state => state.article)
+  const [isOpen, setisOpen] = useState(false)
   const Navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -18,6 +20,9 @@ const Navbar = () => {
   return (
     <div className="bg-[#69c0fe] ">
       <div className="flex justify-between items-center h-[80px]  max-w-[1440px] mx-auto px-5">
+      <button className="absolute right-3  hidden max-sm:block" onClick={() => setisOpen(!isOpen)}>
+              <i className="fa-solid fa-bars text-2xl"></i>
+      </button>
         <div className="flex items-center gap-[9px]">
           <Link to={loggetIn == true ? "/" : 'login'}>
             <h2 className="uppercase text-[20px] font-bold text-[#a114ff] mr-[30px]">
@@ -25,7 +30,8 @@ const Navbar = () => {
             </h2>
           </Link>
         </div>
-        <div className="flex items-center gap-4">
+        <NavModal loggetIn={loggetIn} logoutHandel={logoutHandel} user={user} isOpen={isOpen} setisOpen={setisOpen}/>
+        <div className="flex items-center gap-4 max-sm:hidden">
           {loggetIn ?
             <>
               <div className="flex items-center gap-2">

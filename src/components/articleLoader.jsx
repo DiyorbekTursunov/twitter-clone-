@@ -4,23 +4,23 @@ const ArticleLoader = () => {
     return (
         <div className="p-4 mt-10 border border-gray-200  rounded-xl shadow-lg animate-pulse dark:border-gray-700 transform transition duration-500 hover:scale-105 hover:shadow-2xl">
             <div className="rounded-lg p-6 text-neutral-700 shadow-lg dark:bg-neutral-600 dark:text-neutral-200 dark:shadow-black/30">
-                <h2 className="w-[1060px] h-7 mb-5 bg-gray-200  dark:bg-gray-700 "></h2>
+                <h2 className="w-[70%] h-7 mb-5 bg-gray-200  dark:bg-gray-700 "></h2>
                 <p className="mb-5 w-[1260px] h-3  bg-gray-200  dark:bg-gray-700 "></p>
                 <hr className="my-6 h-0.5 border-t-0 bg-neutral-200 opacity-100 dark:opacity-30" />
                 <div>
-                    <p className="mb-2 w-[1260px] h-3  bg-gray-200  dark:bg-gray-700 "></p>
-                    <p className="mb-2 w-[1260px] h-3  bg-gray-200  dark:bg-gray-700 "></p>
-                    <p className="mb-2 w-[1260px] h-3  bg-gray-200  dark:bg-gray-700 "></p>
-                    <p className="mb-2 w-[1260px] h-3  bg-gray-200  dark:bg-gray-700 "></p>
-                    <p className="mb-2 w-[1260px] h-3  bg-gray-200  dark:bg-gray-700 "></p>
-                    <p className="mb-2 w-[1260px] h-3  bg-gray-200  dark:bg-gray-700 "></p>
-                    <p className="mb-2 w-[1160px] h-3  bg-gray-200  dark:bg-gray-700 "></p>
-                    <p className="mb-2 w-[1060px] h-3  bg-gray-200  dark:bg-gray-700 "></p>
+                    <p className="mb-2 w-[70%] h-3  bg-gray-200  dark:bg-gray-700 "></p>
+                    <p className="mb-2 w-[70%] h-3  bg-gray-200  dark:bg-gray-700 "></p>
+                    <p className="mb-2 w-[70%] h-3  bg-gray-200  dark:bg-gray-700 "></p>
+                    <p className="mb-2 w-[70%] h-3  bg-gray-200  dark:bg-gray-700 "></p>
+                    <p className="mb-2 w-[70%] h-3  bg-gray-200  dark:bg-gray-700 "></p>
+                    <p className="mb-2 w-[70%] h-3  bg-gray-200  dark:bg-gray-700 "></p>
+                    <p className="mb-2 w-[80%] h-3  bg-gray-200  dark:bg-gray-700 "></p>
+                    <p className="mb-2 w-[80%] h-3  bg-gray-200  dark:bg-gray-700 "></p>
 
                 </div>
                 <hr className="my-6 h-0.5 border-t-0 bg-neutral-200 opacity-100 dark:opacity-30" />
                 <div className="flex gap-2 mb-4">
-                    <p className='h-2  w-[260px] font-semibold opacity 80 bg-gray-200  dark:bg-gray-700 mb-2.5'><span className='font-black bg-gray-200  dark:bg-gray-700 mb-2.5'></span></p>
+                    <p className='h-2  w-[20%] font-semibold opacity 80 bg-gray-200  dark:bg-gray-700 mb-2.5'><span className='font-black bg-gray-200  dark:bg-gray-700 mb-2.5'></span></p>
                 </div>
                 <div className="flex items-center justify-between mt-4 space-x-3 px-5">
                     <div className='flex flex-col gap-3'>

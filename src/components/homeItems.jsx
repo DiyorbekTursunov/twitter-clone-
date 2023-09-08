@@ -2,14 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-const HomeItems = ({ author, title, favoritesCount, description, slug , deleteHendel}) => {
+const HomeItems = ({ author, title, favoritesCount, description, slug, deleteHendel }) => {
     const naigate = useNavigate()
     const { articles, isloading } = useSelector(state => state.article)
     const { loggetIn, user } = useSelector(state => state.auth)
     return (
         <div className="max-w-xs container bg-white rounded-xl shadow-lg transform transition duration-500 hover:shadow-2xl flex flex-col justify-between">
             <div>
-                {/* <img className="w-full cursor-pointer rounded-t-xl " src="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" /> */}
                 <div className="flex items-center justify-center h-[219.994px] mb-4 bg-gray-300 rounded-t-xl dark:bg-gray-700">
                 </div>
                 <div className="flex p-3 justify-between">
@@ -35,12 +34,11 @@ const HomeItems = ({ author, title, favoritesCount, description, slug , deleteHe
             </div>
             <div className='p-3 pb-5 flex justify-evenly gap-1.5'>
                 <button onClick={() => naigate(`article/${slug}`)} className='w-full h-[40px] border-[2px] border-[#74ff84] hover:bg-[#74ff84] rounded-lg'>View</button>
-
                 {loggetIn && user.username == author.username &&
-                <>
-                    <button onClick={() => naigate(`/edit-article/${slug}`)} className='w-full h-[40px] border-[2px] border-[#62bbff] hover:bg-[#62bbff] rounded-lg'>Edit</button>
-                    <button onClick={() => deleteHendel(slug)} className='w-full h-[40px] border-[2px] border-[#ff74ef] hover:bg-[#ff74ef] rounded-lg'>Del</button>
-                </>}
+                    <>
+                        <button onClick={() => naigate(`/edit-article/${slug}`)} className='w-full h-[40px] border-[2px] border-[#62bbff] hover:bg-[#62bbff] rounded-lg'>Edit</button>
+                        <button onClick={() => deleteHendel(slug)} className='w-full h-[40px] border-[2px] border-[#ff74ef] hover:bg-[#ff74ef] rounded-lg'>Del</button>
+                    </>}
             </div>
         </div>
     )
